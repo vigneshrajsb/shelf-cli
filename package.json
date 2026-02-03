@@ -1,17 +1,17 @@
 {
-  "name": "shelf-cli",
+  "name": "read-it-later-cli",
   "version": "0.1.0",
-  "description": "CLI for saving and organizing URLs - articles, videos, bookmarks",
+  "description": "CLI for saving and organizing URLs - articles, videos, bookmarks. Read it later.",
   "type": "module",
   "bin": {
-    "shelf": "./src/index.ts"
+    "later": "./src/index.ts"
   },
   "scripts": {
     "start": "bun run src/index.ts",
-    "build": "bun build src/index.ts --compile --outfile dist/shelf",
+    "build": "bun build src/index.ts --compile --outfile dist/later",
     "test": "bun test"
   },
-  "keywords": ["cli", "bookmarks", "reading-list", "url", "sqlite"],
+  "keywords": ["cli", "bookmarks", "reading-list", "read-it-later", "url", "sqlite", "pocket", "instapaper"],
   "author": "Nicky 🦊",
   "license": "MIT",
   "devDependencies": {

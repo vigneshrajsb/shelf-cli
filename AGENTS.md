@@ -1,6 +1,6 @@
-# AGENTS.md - How to Use shelf-cli
+# AGENTS.md - How to Use read-it-later-cli
 
-Guide for AI agents to interact with the `shelf` CLI.
+Guide for AI agents to interact with the `later` CLI.
 
 ## Philosophy
 
@@ -11,15 +11,15 @@ Call CLI commands instead of parsing markdown. The database handles consistency;
 ## Quick Reference
 
 ```bash
-shelf add <url> [--tags X] [--bookmark]   # save URL
-shelf reading                             # articles + videos to consume
-shelf reading --videos                    # videos only
-shelf reading --articles                  # articles only
-shelf bookmarks                           # saved references
-shelf done <id>                           # mark complete
-shelf search <query>                      # find items
-shelf tags                                # list all tags
-shelf history --days 7                    # what was read recently
+later add <url> [--tags X] [--bookmark]   # save URL
+later reading                             # articles + videos to consume
+later reading --videos                    # videos only
+later reading --articles                  # articles only
+later bookmarks                           # saved references
+later done <id>                           # mark complete
+later search <query>                      # find items
+later tags                                # list all tags
+later history --days 7                    # what was read recently
 ```
 
 ## Command Patterns
@@ -30,51 +30,51 @@ Auto-detect type from URL:
 
 ```bash
 # User: "save this video" + YouTube link
-shelf add "https://youtube.com/watch?v=abc"
+later add "https://youtube.com/watch?v=abc"
 # ✅ Added: 🎬 Video Title
 
 # User: "bookmark this for later" 
-shelf add "https://turbotax.com" --bookmark --tags "tax,tools"
+later add "https://turbotax.com" --bookmark --tags "tax,tools"
 # ✅ Added: 🔖 TurboTax
 
 # User: "interesting article on AI"
-shelf add "https://blog.com/ai-post" --tags "ai"
+later add "https://blog.com/ai-post" --tags "ai"
 ```
 
 ### Checking Reading List
 
 ```bash
 # User: "what do I need to read?"
-shelf list --json
+later list --json
 
 # User: "what videos are in my queue?"
-shelf list --type video --json
+later list --type video --json
 
 # User: "show me my bookmarks"
-shelf list --type bookmark --status unread --json
+later list --type bookmark --status unread --json
 ```
 
 ### Marking Complete
 
 ```bash
 # User: "finished that article"
-shelf done 3
+later done 3
 
 # User: "watched the YouTube video"
-shelf done 5
+later done 5
 ```
 
 ### Finding Things
 
 ```bash
 # User: "did I save anything about taxes?"
-shelf search "tax" --json
+later search "tax" --json
 
 # User: "what tags do I have?"
-shelf tags --json
+later tags --json
 
 # User: "what did I read last week?"
-shelf history --days 7 --json
+later history --days 7 --json
 ```
 
 ## Type Detection
@@ -99,7 +99,7 @@ The CLI auto-detects type from URL:
 2. **Use tags liberally**: Help user organize (`--tags "ai,tools,later"`)
 3. **Add notes for context**: `--notes "Recommended by X"`
 4. **Use --json**: For programmatic access
-5. **Search broadly**: `shelf search` checks title, url, tags, notes
+5. **Search broadly**: `later search` checks title, url, tags, notes
 
 ## Presenting Data to Users
 
@@ -124,10 +124,10 @@ When showing lists, **always include clickable URLs**:
 - Use emoji prefixes: 📄 article, 🎬 video, 🔖 bookmark
 
 **Default behavior:**
-- "show my reading list" → `shelf reading` (articles + videos)
-- "show my videos" → `shelf reading --videos`
-- "show my bookmarks" → `shelf bookmarks`
-- "what did I read?" → `shelf history --days 7`
+- "show my reading list" → `later reading` (articles + videos)
+- "show my videos" → `later reading --videos`
+- "show my bookmarks" → `later bookmarks`
+- "what did I read?" → `later history --days 7`
 - **Bookmarks are NOT included in reading list** — user must ask explicitly
 
 ## Database Info
@@ -139,7 +139,7 @@ When showing lists, **always include clickable URLs**:
 
 ## First-Time Setup (Onboarding Users)
 
-When a user first uses shelf, explain:
+When a user first uses later, explain:
 
 > "I use a local database (`~/.shelf/shelf.db`) to save URLs you want to read, watch, or bookmark.
 > 
@@ -155,7 +155,7 @@ When a user first uses shelf, explain:
 User: "save this https://youtube.com/watch?v=abc123 looks interesting"
 
 Agent:
-$ shelf add "https://youtube.com/watch?v=abc123"
+$ later add "https://youtube.com/watch?v=abc123"
 
 Response: "✅ Saved to your watchlist! You have 5 videos queued."
 ```
@@ -164,7 +164,7 @@ Response: "✅ Saved to your watchlist! You have 5 videos queued."
 User: "what did I read this week?"
 
 Agent:
-$ shelf history --days 7 --json
+$ later history --days 7 --json
 
 Response: "This week you finished:
 - 📄 How to Build AI Agents (Mon)
@@ -175,8 +175,8 @@ Response: "This week you finished:
 ## Installation
 
 ```bash
-git clone https://github.com/vigneshrajsb/shelf-cli.git
-cd shelf-cli && bun install && bun link
+git clone https://github.com/vigneshrajsb/read-it-later-cli.git
+cd read-it-later-cli && bun install && bun link
 ```
 
 Requires Bun runtime.

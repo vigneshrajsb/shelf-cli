@@ -9,14 +9,14 @@ Read **AGENTS.md** for complete usage.
 ## Quick Commands
 
 ```bash
-shelf add <url>                   # save (auto-detects type)
-shelf add <url> --bookmark        # save as bookmark
-shelf reading                     # articles + videos to consume
-shelf reading --videos            # videos only
-shelf bookmarks                   # saved references
-shelf done <id>                   # mark complete
-shelf search <query>              # find items
-shelf history --days 7            # recent completions
+later add <url>                   # save (auto-detects type)
+later add <url> --bookmark        # save as bookmark
+later reading                     # articles + videos to consume
+later reading --videos            # videos only
+later bookmarks                   # saved references
+later done <id>                   # mark complete
+later search <query>              # find items
+later history --days 7            # recent completions
 ```
 
 ## Types

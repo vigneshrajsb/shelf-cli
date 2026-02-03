@@ -105,7 +105,7 @@ describe("listItems", () => {
 
     const videos = listItems({ type: "video" });
     expect(videos.length).toBe(1);
-    expect(videos[0].type).toBe("video");
+    expect(videos[0]!.type).toBe("video");
   });
 
   test("filters by tag", async () => {
@@ -114,7 +114,7 @@ describe("listItems", () => {
 
     const aiItems = listItems({ tag: "ai" });
     expect(aiItems.length).toBe(1);
-    expect(aiItems[0].tags).toContain("ai");
+    expect(aiItems[0]!.tags).toContain("ai");
   });
 
   test("respects limit", async () => {
@@ -220,7 +220,7 @@ describe("searchItems", () => {
 
     const results = searchItems("AI");
     expect(results.length).toBe(1);
-    expect(results[0].title).toContain("AI");
+    expect(results[0]!.title).toContain("AI");
   });
 
   test("searches by tags", async () => {
@@ -229,7 +229,7 @@ describe("searchItems", () => {
 
     const results = searchItems("ml");
     expect(results.length).toBe(1);
-    expect(results[0].tags).toContain("ml");
+    expect(results[0]!.tags).toContain("ml");
   });
 
   test("respects limit", async () => {
@@ -273,7 +273,7 @@ describe("getTags", () => {
     await addItem("https://example.com/t3", { title: "T3", tags: "common,rare" });
 
     const tags = getTags();
-    expect(tags[0].tag).toBe("common");
-    expect(tags[0].count).toBe(3);
+    expect(tags[0]!.tag).toBe("common");
+    expect(tags[0]!.count).toBe(3);
   });
 });

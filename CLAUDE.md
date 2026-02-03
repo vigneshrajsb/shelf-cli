@@ -11,10 +11,11 @@ Read **AGENTS.md** for complete usage.
 ```bash
 shelf add <url>                   # save (auto-detects type)
 shelf add <url> --bookmark        # save as bookmark
-shelf list                        # show unread items
+shelf reading                     # articles + videos to consume
+shelf reading --videos            # videos only
+shelf bookmarks                   # saved references
 shelf done <id>                   # mark complete
 shelf search <query>              # find items
-shelf tags                        # list all tags
 shelf history --days 7            # recent completions
 ```
 

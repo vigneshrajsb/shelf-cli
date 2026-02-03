@@ -12,7 +12,10 @@ Call CLI commands instead of parsing markdown. The database handles consistency;
 
 ```bash
 shelf add <url> [--tags X] [--bookmark]   # save URL
-shelf list [--type X] [--status X]        # view items
+shelf reading                             # articles + videos to consume
+shelf reading --videos                    # videos only
+shelf reading --articles                  # articles only
+shelf bookmarks                           # saved references
 shelf done <id>                           # mark complete
 shelf search <query>                      # find items
 shelf tags                                # list all tags
@@ -121,10 +124,10 @@ When showing lists, **always include clickable URLs**:
 - Use emoji prefixes: 📄 article, 🎬 video, 🔖 bookmark
 
 **Default behavior:**
-- "show my reading list" → **unread articles/videos only** (`shelf list --type article` + `--type video`)
-- "what did I read?" → completed items (`shelf list --status read`)
-- "show my bookmarks" → bookmarks only (`shelf list --type bookmark`)
-- Only show completed items when user explicitly asks for history/completed
+- "show my reading list" → `shelf reading` (articles + videos)
+- "show my videos" → `shelf reading --videos`
+- "show my bookmarks" → `shelf bookmarks`
+- "what did I read?" → `shelf history --days 7`
 - **Bookmarks are NOT included in reading list** — user must ask explicitly
 
 ## Database Info

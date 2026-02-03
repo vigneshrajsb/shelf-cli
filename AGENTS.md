@@ -118,8 +118,12 @@ When showing lists, **always include clickable URLs**:
 - Use `<url>` format for clickable links (works in Telegram/Discord)
 - Include title if available, otherwise just the URL
 - Show tags in brackets `[tag1, tag2]`
-- Group by status (Unread / Completed)
 - Use emoji prefixes: 📄 article, 🎬 video, 🔖 bookmark
+
+**Default behavior:**
+- "show my reading list" → **unread only** (`shelf list`)
+- "what did I read?" → completed items (`shelf list --status read`)
+- Only show completed items when user explicitly asks for history/completed
 
 ## Database Info
 

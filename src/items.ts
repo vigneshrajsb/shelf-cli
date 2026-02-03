@@ -52,13 +52,13 @@ export async function fetchTitle(url: string): Promise<string | null> {
     
     // Try to extract title from HTML
     const titleMatch = html.match(/<title[^>]*>([^<]+)<\/title>/i);
-    if (titleMatch) {
+    if (titleMatch && titleMatch[1]) {
       return titleMatch[1].trim().slice(0, 500); // Limit length
     }
     
     // Try og:title
     const ogMatch = html.match(/<meta[^>]+property=["']og:title["'][^>]+content=["']([^"']+)["']/i);
-    if (ogMatch) {
+    if (ogMatch && ogMatch[1]) {
       return ogMatch[1].trim().slice(0, 500);
     }
     
@@ -80,7 +80,7 @@ export async function addItem(
   const type = detectType(url, options.isBookmark || false);
   
   // Auto-fetch title if not provided
-  let title = options.title;
+  let title: string | null = options.title || null;
   if (!title) {
     title = await fetchTitle(url);
   }
@@ -91,7 +91,7 @@ export async function addItem(
     RETURNING *
   `);
   
-  return stmt.get(url, title, type, options.tags || null, options.notes || null) as Item;
+  return stmt.get(url, title, type, options.tags ?? null, options.notes ?? null) as Item;
 }
 
 export function getItem(idOrUrl: string | number): Item | null {

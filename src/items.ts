@@ -152,7 +152,7 @@ export function markUnread(idOrUrl: string | number): boolean {
 
 export function updateItem(
   idOrUrl: string | number,
-  updates: { tags?: string; notes?: string; title?: string }
+  updates: { tags?: string; notes?: string; title?: string; type?: Item["type"] }
 ): boolean {
   const item = getItem(idOrUrl);
   if (!item) return false;
@@ -165,6 +165,9 @@ export function updateItem(
   }
   if (updates.title !== undefined) {
     db.prepare("UPDATE items SET title = ? WHERE id = ?").run(updates.title, item.id);
+  }
+  if (updates.type !== undefined) {
+    db.prepare("UPDATE items SET type = ? WHERE id = ?").run(updates.type, item.id);
   }
   
   return true;

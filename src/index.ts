@@ -21,7 +21,7 @@ COMMANDS:
   tags                      List all tags with counts
   history                   Show recently completed items
   recent [days]             Show recently added items
-  edit <id>                 Edit item tags/notes
+  edit <id>                 Edit item (tags/notes/title/type)
   delete <id>               Delete an item
   db                        Show database path
 
@@ -283,17 +283,19 @@ async function main() {
     case "edit": {
       const id = positionals[1];
       if (!id) {
-        console.error("Usage: shelf edit <id> [--tags X] [--notes X] [--title X]");
+        console.error("Usage: shelf edit <id> [--tags X] [--notes X] [--title X] [--type video|article|bookmark] [--bookmark]");
         process.exit(1);
       }
       
-      const updates: { tags?: string; notes?: string; title?: string } = {};
+      const updates: { tags?: string; notes?: string; title?: string; type?: items.Item["type"] } = {};
       if (values.tags !== undefined) updates.tags = values.tags as string;
       if (values.notes !== undefined) updates.notes = values.notes as string;
       if (values.title !== undefined) updates.title = values.title as string;
+      if (values.type !== undefined) updates.type = values.type as items.Item["type"];
+      if (values.bookmark) updates.type = "bookmark";
       
       if (Object.keys(updates).length === 0) {
-        console.error("Provide at least one field to update: --tags, --notes, --title");
+        console.error("Provide at least one field to update: --tags, --notes, --title, --type, --bookmark");
         process.exit(1);
       }
       
@@ -301,7 +303,8 @@ async function main() {
       if (asJson) {
         console.log(JSON.stringify({ success, id, updates }));
       } else if (success) {
-        console.log(`✅ Updated: ${id}`);
+        const typeMsg = updates.type ? ` → ${typeEmoji(updates.type)} ${updates.type}` : "";
+        console.log(`✅ Updated: ${id}${typeMsg}`);
       } else {
         console.error(`❌ Item not found: ${id}`);
         process.exit(1);

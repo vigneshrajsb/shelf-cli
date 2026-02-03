@@ -3,12 +3,13 @@ import { existsSync, mkdirSync } from "fs";
 import { join } from "path";
 import { homedir } from "os";
 
-// Store data in ~/.shelf/shelf.db
-const DATA_DIR = join(homedir(), ".shelf");
-const DB_PATH = join(DATA_DIR, "shelf.db");
+// Support test database via environment variable
+const isTest = process.env.RIL_TEST === "1";
+const DATA_DIR = isTest ? "/tmp/ril-test" : join(homedir(), ".shelf");
+const DB_PATH = isTest ? ":memory:" : join(DATA_DIR, "shelf.db");
 
-// Ensure data directory exists
-if (!existsSync(DATA_DIR)) {
+// Ensure data directory exists (skip for in-memory)
+if (DB_PATH !== ":memory:" && !existsSync(DATA_DIR)) {
   mkdirSync(DATA_DIR, { recursive: true });
 }
 

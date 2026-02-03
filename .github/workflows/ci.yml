@@ -22,7 +22,7 @@ jobs:
       - name: Type check
         run: bun run tsc --noEmit
       
-      - name: Test CLI
-        run: |
-          bun run src/index.ts --help
-          echo "✅ CLI runs successfully"
+      - name: Run tests
+        run: RIL_TEST=1 bun test
+        env:
+          RIL_TEST: "1"

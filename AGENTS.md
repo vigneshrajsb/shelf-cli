@@ -121,9 +121,11 @@ When showing lists, **always include clickable URLs**:
 - Use emoji prefixes: 📄 article, 🎬 video, 🔖 bookmark
 
 **Default behavior:**
-- "show my reading list" → **unread only** (`shelf list`)
+- "show my reading list" → **unread articles/videos only** (`shelf list --type article` + `--type video`)
 - "what did I read?" → completed items (`shelf list --status read`)
+- "show my bookmarks" → bookmarks only (`shelf list --type bookmark`)
 - Only show completed items when user explicitly asks for history/completed
+- **Bookmarks are NOT included in reading list** — user must ask explicitly
 
 ## Database Info
 

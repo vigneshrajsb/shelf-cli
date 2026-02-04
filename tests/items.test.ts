@@ -1,8 +1,5 @@
 import { describe, test, expect, beforeEach } from "bun:test";
-
-// Set test mode BEFORE importing db
-process.env.RIL_TEST = "1";
-
+// RIL_TEST=1 is set via bunfig.toml preload
 import { db, initDb } from "../src/db";
 import {
   addItem,
